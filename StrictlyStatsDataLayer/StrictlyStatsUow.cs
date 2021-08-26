@@ -44,14 +44,6 @@ namespace StrictlyStatsDataLayer
             return couplesAndScoresForWeekNumber;
         }
 
-       public List<string> GetCouplesRankedForDance (int danceId)
-        {
-            List<Score> scores = Scores.GetScoresRankedForDance(danceId);
-            List<string> couplesAndScoresForDance = GetCouplesAndScores(scores);
-
-            return couplesAndScoresForDance;
-        }
-
         private List<string> GetCouplesAndScores(List<Score> scores)
         {
             int i = 0;
@@ -66,19 +58,6 @@ namespace StrictlyStatsDataLayer
                 ).ToList();
         }
 
-        private List<string> GetCouplesAndScoresByDance(List<Score> scores)
-        {
-            int i = 0;
-            return scores.Select((s) =>
-                    $"{++i:00}" + ") " +
-                    s.Couple.CelebrityFirstName + " " +
-                    s.Couple.CelebrityLastName + " & " +
-                    s.Couple.ProfessionalFirstName + " " +
-                    s.Couple.ProfessionalLastName + " Score: " +
-                    s.Grade + " Week No: " +
-                    s.WeekNumber
-                ).ToList();
-        }
         //repositories
         #region Repositries
         private IReposCouples _couples;
