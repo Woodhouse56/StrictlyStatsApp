@@ -65,20 +65,6 @@ namespace StrictlyStatsDataLayer
                     s.WeekNumber
                 ).ToList();
         }
-
-        private List<string> GetCouplesAndScoresByDance(List<Score> scores)
-        {
-            int i = 0;
-            return scores.Select((s) =>
-                    $"{++i:00}" + ") " +
-                    s.Couple.CelebrityFirstName + " " +
-                    s.Couple.CelebrityLastName + " & " +
-                    s.Couple.ProfessionalFirstName + " " +
-                    s.Couple.ProfessionalLastName + " Score: " +
-                    s.Grade + " Week No: " +
-                    s.WeekNumber
-                ).ToList();
-        }
         //repositories
         #region Repositries
         private IReposCouples _couples;

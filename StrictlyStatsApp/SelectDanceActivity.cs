@@ -19,6 +19,7 @@ namespace StrictlyStats
     {
         Spinner dancesSpinner;
 
+        string selectedDance;
         int selectedDanceId;
         IStrictlyStatsUOW uow = Global.UOW;
         ActivityType activityType;
@@ -50,6 +51,7 @@ namespace StrictlyStats
         private void OkButton_Click(object sender, EventArgs e)
         {
             Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(RankCouplesByDanceActivity));
+            rankCouplesByDanceActivityIntent.PutExtra("Dance", selectedDance);
             rankCouplesByDanceActivityIntent.PutExtra("DanceId", selectedDanceId);
             StartActivity(rankCouplesByDanceActivityIntent);
             Finish();
@@ -63,7 +65,7 @@ namespace StrictlyStats
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;
-            string selectedDance = string.Format("{0}", spinner.GetItemIdAtPosition(e.Position));
+            selectedDance = string.Format("{0}", spinner.GetItemIdAtPosition(e.Position));
             selectedDanceId = int.Parse(selectedDance);
             selectedDanceId += 1;
         }
