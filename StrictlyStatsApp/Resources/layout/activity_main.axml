@@ -35,6 +35,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/rankingsButton" />
     <Button
+        android:text="Rankings By Dance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rankingsByDanceButton" />
+    <Button
         android:text="Vote Off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

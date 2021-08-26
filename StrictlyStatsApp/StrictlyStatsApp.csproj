@@ -71,11 +71,13 @@
     <Compile Include="Instructions.cs" />
     <Compile Include="InstructionsAdapter.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="RankCouplesByDanceActivity.cs" />
     <Compile Include="RankCouplesActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="SelectCoupleActivity.cs" />
     <Compile Include="EnterScoresActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectDanceActivity.cs" />
     <Compile Include="SelectWeekNumberActivity.cs" />
     <Compile Include="StatsForTheWeekActivity.cs" />
     <Compile Include="WinnerActivity.cs" />
@@ -167,6 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\InstructionDetail.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SelectDance.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

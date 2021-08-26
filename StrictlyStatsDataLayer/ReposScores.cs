@@ -33,6 +33,18 @@ namespace StrictlyStatsDataLayer
             return scores;
         }
 
+        public List<Score> GetScoresRankedForDance(int danceId)
+        {
+            List<Score> scores = Get(s => s.DanceID == danceId, s => s.Grade).ToList();
+            scores.Reverse();
+            foreach (Score score in scores)
+            {
+                score.Couple = con.Table<Couple>().Single(c => c.CoupleID == score.CoupleID);
+            }
+
+            return scores;
+        }
+
         public void DeleteScoresForWeekNumber(int weekNumber)
         {
             con.Table<Score>().Delete(s => s.WeekNumber == weekNumber);
