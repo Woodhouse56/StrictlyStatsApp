@@ -57,7 +57,10 @@ namespace StrictlyStatsDataLayer
                     s.WeekNumber
                 ).ToList();
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
         //repositories
         #region Repositries
         private IReposCouples _couples;
