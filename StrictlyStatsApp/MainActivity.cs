@@ -44,9 +44,6 @@ namespace StrictlyStats
             Button rankingsButton = FindViewById<Button>(Resource.Id.rankingsButton);
             rankingsButton.Click += RankingsButton_Click;
 
-            Button rankingsByDanceButton = FindViewById<Button>(Resource.Id.rankingsByDanceButton);
-            rankingsByDanceButton.Click += RankingsByDanceButton_Click;
-
             voteOffButton = FindViewById<Button>(Resource.Id.voteOffButton);
             voteOffButton.Click += VoteOffButton_Click;
         }
@@ -86,14 +83,6 @@ namespace StrictlyStats
                 rankingsIntent.PutExtra("ActivityType", (int)ActivityType.Rankings);
                 StartActivity(rankingsIntent);
                 return;
-        }
-
-        private void RankingsByDanceButton_Click(object sender, System.EventArgs e)
-        {
-            Intent rankingsIntent = new Intent(this, typeof(SelectDanceActivity));
-            rankingsIntent.PutExtra("ActivityType", (int)ActivityType.Rankings);
-            StartActivity(rankingsIntent);
-            return;
         }
 
         private void VoteOffButton_Click(object sender, System.EventArgs e)

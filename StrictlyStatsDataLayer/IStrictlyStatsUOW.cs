@@ -26,6 +26,5 @@ namespace StrictlyStatsDataLayer
         IReposInstructions Instructions { get; }
 
         List<string> GetCouplesRankedForWeekNumber(int weekNumber);
-        List<string> GetCouplesRankedForDance(int danceId);
     }
 }
