@@ -67,10 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityType.cs" />
+    <Compile Include="AppAdministrationHomeScreenActivity.cs" />
     <Compile Include="InstructionDetailActivity.cs" />
     <Compile Include="Instructions.cs" />
     <Compile Include="InstructionsAdapter.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="modifyDancesActivity.cs" />
     <Compile Include="RankCouplesByDanceActivity.cs" />
     <Compile Include="RankCouplesActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -175,6 +177,16 @@
   <ItemGroup>
     <AndroidResource Include="Resources\layout\SelectDance.axml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\AdminHomeScreen.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ModifyDances.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

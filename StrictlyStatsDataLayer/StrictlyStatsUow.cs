@@ -65,6 +65,12 @@ namespace StrictlyStatsDataLayer
                     s.WeekNumber
                 ).ToList();
         }
+
+        public void modifyDanceElement(int DanceId, string NewName)
+        {
+            Dances.ModifyDancebyId(DanceId, NewName);
+        }
+
         //repositories
         #region Repositries
         private IReposCouples _couples;

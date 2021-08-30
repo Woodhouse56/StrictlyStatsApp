@@ -15,6 +15,9 @@ namespace StrictlyStatsDataLayer
 {
     public interface IReposDances: IRepository<Dance>
     {
+        public void ModifyDancebyId(int DanceId, string NewName);
+
+        public void DeleteScoresForDanceId(int DanceId);
 
     }
 }

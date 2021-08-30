@@ -16,14 +16,26 @@
 		android:minHeight="25px"
 		android:id="@+id/dancesSpinner" />
 	<Button
-		android:text="OK"
+		android:text="Select Dance"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:id="@+id/okButton" />
+		<Button
+		android:text="Modify Selected Dance"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/modifySelectedDanceButton" />
+	<Button
+		android:text="Add New Dance"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/addDanceButton" />
 	<Button
 		android:text="Cancel"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:id="@+id/cancelButton" />
+
+
 
 </LinearLayout>

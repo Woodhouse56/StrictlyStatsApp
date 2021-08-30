@@ -14,6 +14,8 @@ namespace StrictlyStats
     {
         Button enterScoresButton;
         Button voteOffButton;
+        const string originPage = "MainActivity";
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -46,6 +48,9 @@ namespace StrictlyStats
 
             Button rankingsByDanceButton = FindViewById<Button>(Resource.Id.rankingsByDanceButton);
             rankingsByDanceButton.Click += RankingsByDanceButton_Click;
+
+            Button appAdministrationButton = FindViewById<Button>(Resource.Id.appAdministrationButton);
+            appAdministrationButton.Click += AppAdministrationButton_Click;
 
             voteOffButton = FindViewById<Button>(Resource.Id.voteOffButton);
             voteOffButton.Click += VoteOffButton_Click;
@@ -92,7 +97,16 @@ namespace StrictlyStats
         {
             Intent rankingsIntent = new Intent(this, typeof(SelectDanceActivity));
             rankingsIntent.PutExtra("ActivityType", (int)ActivityType.Rankings);
+            rankingsIntent.PutExtra("OriginPage", originPage);
             StartActivity(rankingsIntent);
+            return;
+        }
+
+        private void AppAdministrationButton_Click(object sender, System.EventArgs e)
+        {
+            Intent adminIntent = new Intent(this, typeof(AppAdministrationHomeScreenActivity));
+            adminIntent.PutExtra("ActivityType", (int)ActivityType.AppAdministration);
+            StartActivity(adminIntent);
             return;
         }
 
