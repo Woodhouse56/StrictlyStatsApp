@@ -1,7 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+	<TextView
+		android:text="Dance Name"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/danceNameTextView"
+	    android:textSize="24dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submittedDanceNameEditText"
+        android:textSize="24dp"
+        android:inputType="text" />
+    <TextView
+        android:text="Description:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/descriptionTextView"
+        android:textSize="24dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submittedDescriptionEditText"
+        android:textSize="24dp"
+        android:inputType="text" />
+    <TextView
+        android:text="Degree of Difficulty:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/degreeOfDifficultyTextView"
+        android:textSize="24dp" />
+    <Spinner
+		android:layout_width="match_parent"
+		android:layout_height="56.0dp"
+		android:textSize="24dp"
+		android:id="@+id/degreeOfDifficultySpinner" />
+    <Button
+        android:text="Submit Changes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitChangesButton" />
+    <Button
+        android:text="DELETE SELECTED DANCE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteDanceButton" />
+	<Button
+		android:text="Cancel"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/cancelButton" />
 
 </LinearLayout>

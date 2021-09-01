@@ -66,9 +66,9 @@ namespace StrictlyStatsDataLayer
                 ).ToList();
         }
 
-        public void modifyDanceElement(int DanceId, string NewName)
+        public Dance getDanceEnitity(int DanceId)
         {
-            Dances.ModifyDancebyId(DanceId, NewName);
+            return Dances.GetDancebyId(DanceId);
         }
 
         //repositories

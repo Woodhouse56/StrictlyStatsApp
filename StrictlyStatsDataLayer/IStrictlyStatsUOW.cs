@@ -27,7 +27,7 @@ namespace StrictlyStatsDataLayer
 
         List<string> GetCouplesRankedForWeekNumber(int weekNumber);
         List<string> GetCouplesRankedForDance(int danceId);
+        public Dance getDanceEnitity(int DanceId);
 
-        public void modifyDanceElement(int DanceId, string NewName);
     }
 }

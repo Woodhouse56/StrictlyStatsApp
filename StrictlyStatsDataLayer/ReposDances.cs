@@ -20,15 +20,9 @@ namespace StrictlyStatsDataLayer
         {
 
         }
-
-        public void ModifyDancebyId(int DanceId, string NewName)
+        public Dance GetDancebyId(int DanceId)
         {
-            Dance dance = con.Table<Dance>().ElementAt(DanceId);
-
-            dance.DanceName = "Yeyey";
-
-            con.Update(dance);
-
+            return con.Table<Dance>().ElementAt(DanceId);
         }
 
         public void DeleteScoresForDanceId(int DanceId)

@@ -40,6 +40,7 @@ namespace StrictlyStats
             Button addDanceButton = FindViewById<Button>(Resource.Id.addDanceButton);
             Button modifySelectedDanceButton = FindViewById<Button>(Resource.Id.modifySelectedDanceButton);
 
+
             activityType = (ActivityType)Intent.GetIntExtra("ActivityType", -1);
 
             originPage = originPage = originPage = Intent.GetStringExtra("OriginPage");
@@ -64,6 +65,15 @@ namespace StrictlyStats
             okButton.Click += OkButton_Click;
             cancelButton.Click += CancelButton_Click;
             modifySelectedDanceButton.Click += ModifySelectedDanceButton_Click;
+            addDanceButton.Click += AddDanceButton_Click;
+        }
+
+        private void AddDanceButton_Click(object sender, EventArgs e)
+        {
+            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(modifyDancesActivity));
+            rankCouplesByDanceActivityIntent.PutExtra("Dance", "newDance");
+            StartActivity(rankCouplesByDanceActivityIntent);
+            Finish();
         }
 
         private void ModifySelectedDanceButton_Click(object sender, EventArgs e)
