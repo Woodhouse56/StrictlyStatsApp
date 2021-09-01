@@ -16,6 +16,8 @@ namespace StrictlyStats
     {
         EnterScores,
         Rankings,
-        VoteOff
+        RankingsByDance,
+        VoteOff,
+        AppAdministration
     }
 }

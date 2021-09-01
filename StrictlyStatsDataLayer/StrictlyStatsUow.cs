@@ -65,6 +65,12 @@ namespace StrictlyStatsDataLayer
                     s.WeekNumber
                 ).ToList();
         }
+
+        public Dance getDanceEnitity(int DanceId)
+        {
+            return Dances.GetDancebyId(DanceId);
+        }
+
         //repositories
         #region Repositries
         private IReposCouples _couples;

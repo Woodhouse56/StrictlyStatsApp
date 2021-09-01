@@ -122,7 +122,7 @@ namespace StrictlyStats
             }
 
             Score score = new Score {
-                DanceID= dances[dancesSpinner.SelectedItemPosition].DanceID,
+                DanceID= (int)dances[dancesSpinner.SelectedItemPosition].DanceID,
                 CoupleID=couples[index].CoupleID,
                 WeekNumber=weekNumber,
                 Grade= int.Parse(coupleScoreEditText.Text),

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="top">
+    android:layout_height="match_parent">
+
     <TextView
-        android:text="Welcome to the Couple Scores App!"
+        android:text="Welcome to Admin Screen"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,40 +14,31 @@
         android:textStyle="bold"
         android:textAlignment="center" />
     <TextView
-        android:text="Please select one of the below options"
+        android:text="Please select one of the below options, to modify associated data."
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/selectTextView" />
+
     <Button
-        android:text="Instructions"
+        android:text="Modify Couples"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/instructionsButton" />
+        android:id="@+id/modifyCouplesButton" />
     <Button
-        android:text="Enter Scores"
+        android:text="Modify Dances"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/enterScoresButton" />
+        android:id="@+id/modifyDancesButton" />
     <Button
-        android:text="Rankings"
+        android:text="Modify Scores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rankingsButton" />
+        android:id="@+id/modifyScoresButton" />
     <Button
-        android:text="Rankings By Dance"
+        android:text="Return to Main Menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rankingsByDanceButton" />
-    <Button
-        android:text="Vote Off"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/voteOffButton" />
-    <Button
-        android:text="App Administration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appAdministrationButton"/>
+        android:id="@+id/returnToMainMenuButton" />
 
 </LinearLayout>

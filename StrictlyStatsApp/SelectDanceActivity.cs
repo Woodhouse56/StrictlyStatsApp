@@ -21,9 +21,11 @@ namespace StrictlyStats
 
         string selectedDance;
         int selectedDanceId;
+        string originPage;
         IStrictlyStatsUOW uow = Global.UOW;
         ActivityType activityType;
         List<Dance> dances;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,7 +37,23 @@ namespace StrictlyStats
 
             Button okButton = FindViewById<Button>(Resource.Id.okButton);
             Button cancelButton = FindViewById<Button>(Resource.Id.cancelButton);
+            Button addDanceButton = FindViewById<Button>(Resource.Id.addDanceButton);
+            Button modifySelectedDanceButton = FindViewById<Button>(Resource.Id.modifySelectedDanceButton);
+
+
             activityType = (ActivityType)Intent.GetIntExtra("ActivityType", -1);
+
+            originPage = originPage = originPage = Intent.GetStringExtra("OriginPage");
+
+            if (originPage == "MainActivity")
+            {
+                addDanceButton.Visibility = ViewStates.Gone;
+                modifySelectedDanceButton.Visibility = ViewStates.Gone;
+            }
+            else if (originPage == "AppAdministrationHomeScreenActivity")
+            {
+                okButton.Visibility = ViewStates.Gone;
+            }
 
             //Create array of strings containing dance names
             dances = uow.Dances.GetAll();
@@ -46,11 +64,50 @@ namespace StrictlyStats
 
             okButton.Click += OkButton_Click;
             cancelButton.Click += CancelButton_Click;
+            modifySelectedDanceButton.Click += ModifySelectedDanceButton_Click;
+            addDanceButton.Click += AddDanceButton_Click;
+        }
+
+        private void AddDanceButton_Click(object sender, EventArgs e)
+        {
+            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(modifyDancesActivity));
+            rankCouplesByDanceActivityIntent.PutExtra("Dance", "newDance");
+            StartActivity(rankCouplesByDanceActivityIntent);
+            Finish();
+        }
+
+        private void ModifySelectedDanceButton_Click(object sender, EventArgs e)
+        {
+            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(modifyDancesActivity));
+            rankCouplesByDanceActivityIntent.PutExtra("Dance", selectedDance);
+            rankCouplesByDanceActivityIntent.PutExtra("DanceId", selectedDanceId);
+            StartActivity(rankCouplesByDanceActivityIntent);
+            Finish();
         }
 
         private void OkButton_Click(object sender, EventArgs e)
+        { 
+            if (originPage == "MainActivity")
+            {
+                RankCouplesByDanceActivity(sender, e);
+            } else if (originPage == "AppAdministrationHomeScreenActivity")
+            {
+                modifyDancesActivity(sender, e);
+            }
+        }
+
+        private void RankCouplesByDanceActivity(object sender, EventArgs e)
         {
             Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(RankCouplesByDanceActivity));
+            rankCouplesByDanceActivityIntent.PutExtra("Dance", selectedDance);
+            rankCouplesByDanceActivityIntent.PutExtra("DanceId", selectedDanceId);
+            StartActivity(rankCouplesByDanceActivityIntent);
+            Finish();
+        }
+
+        private void modifyDancesActivity(object sender, EventArgs e)
+        {
+            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(modifyDancesActivity));
             rankCouplesByDanceActivityIntent.PutExtra("Dance", selectedDance);
             rankCouplesByDanceActivityIntent.PutExtra("DanceId", selectedDanceId);
             StartActivity(rankCouplesByDanceActivityIntent);
