@@ -27,7 +27,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/submittedDescriptionEditText"
         android:textSize="24dp"
-        android:inputType="text" />
+        android:inputType="textMultiLine" 
+        android:lines="8"
+        android:minLines="6"
+        android:gravity="top|left"
+        android:maxLines="10" 
+        android:scrollbars="vertical"/>
     <TextView
         android:text="Degree of Difficulty:"
         android:layout_width="match_parent"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<TextView
+		android:text="Shakespearian Plays"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/displayTeamsTeam1DetailsTextView" />
+	<LinearLayout
+		android:orientation="horizontal"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/linearLayout1">
+		<LinearLayout
+				  android:orientation="vertical"
+				  android:minWidth="25px"
+				  android:minHeight="25px"
+				  android:layout_width="1000px"
+				  android:layout_height="wrap_content"
+				  android:id="@+id/linearLayout2">
+			<fragment class="StrictlyStatsApp.SelectWeekNumberFragment"
+			  android:id="@+id/selectFragment"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent" />
+		</LinearLayout>
+		<LinearLayout
+				  android:orientation="vertical"
+				  android:minWidth="25px"
+				  android:minHeight="25px"
+				  android:layout_width="1000px"
+				  android:layout_height="wrap_content"
+				  android:id="@+id/linearLayout3">
+			<fragment class="StrictlyStatsApp.RankCouplesFragment"
+			  android:id="@+id/rankFragment"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

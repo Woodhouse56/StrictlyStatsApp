@@ -1,0 +1,30 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+    <TextView
+		android:text="Shakespearian Plays"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/displayTeamsTeam1DetailsTextView" />
+		<LinearLayout
+			android:orientation="vertical"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/linearLayout1">
+        <fragment
+            android:id="@+id/playsFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            class="StrictlyStatsApp.SelectWeekNumber" />
+        <fragment
+            android:id="@+id/quotesFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            class="StrictlyStatsApp.RankCouples" />
+	</LinearLayout>
+</LinearLayout>

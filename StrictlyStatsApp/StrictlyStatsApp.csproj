@@ -76,6 +76,7 @@
     <Compile Include="RankCouplesByDanceActivity.cs" />
     <Compile Include="RankCouplesActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="SelectWeek_RankCouplesACA.cs" />
     <Compile Include="SelectCoupleActivity.cs" />
     <Compile Include="EnterScoresActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -191,10 +192,12 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\SelectDanceResponsive.axml">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    <AndroidResource Include="Resources\layout\rotation.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout-land\rotation.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
