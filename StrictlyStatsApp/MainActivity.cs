@@ -87,7 +87,7 @@ namespace StrictlyStats
 
         private void RankingsButton_Click(object sender, System.EventArgs e)
         {
-                Intent rankingsIntent = new Intent(this, typeof(SelectWeek_RankCouplesACA));
+                Intent rankingsIntent = new Intent(this, typeof(SelectWeekNumberActivity));
                 rankingsIntent.PutExtra("ActivityType", (int)ActivityType.Rankings);
                 StartActivity(rankingsIntent);
                 return;

@@ -76,7 +76,6 @@
     <Compile Include="RankCouplesByDanceActivity.cs" />
     <Compile Include="RankCouplesActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="SelectWeek_RankCouplesACA.cs" />
     <Compile Include="SelectCoupleActivity.cs" />
     <Compile Include="EnterScoresActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
