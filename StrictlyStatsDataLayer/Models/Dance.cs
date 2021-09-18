@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using SQLite;
+﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
+using System.Collections.Generic;
 
 namespace StrictlyStatsDataLayer.Models
 {
@@ -30,22 +20,26 @@ namespace StrictlyStatsDataLayer.Models
         }
 
         [PrimaryKey, AutoIncrement]
-        public int DanceID {
+        public int DanceID
+        {
             get;
             set;
         }
 
-        public string DanceName {
+        public string DanceName
+        {
             get;
             set;
         }
 
-        public string Description {
+        public string Description
+        {
             get;
             set;
         }
 
-        public int DegreeOfDifficulty {
+        public int DegreeOfDifficulty
+        {
             get;
             set;
         }

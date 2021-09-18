@@ -1,17 +1,8 @@
-﻿using System;
+﻿using SQLite;
+using StrictlyStatsDataLayer.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using SQLite;
-using StrictlyStatsDataLayer.Models;
 
 namespace StrictlyStatsDataLayer
 {
@@ -36,40 +27,80 @@ namespace StrictlyStatsDataLayer
             Connection = new SQLiteConnection(dbPath);
         }
 
-        public List<string> GetCouplesRankedForWeekNumber(int weekNumber)
+        public List<string> GetCouplesRanked(int id)
         {
-            List<Score> scores = Scores.GetScoresRankedForWeek(weekNumber);
-            List<string> couplesAndScoresForWeekNumber = GetCouplesAndScores(scores);
+            List<Score> scores;
 
-            return couplesAndScoresForWeekNumber;
+            /** Checks the first function used to determine whether to grab data for Dances or Weeks  */
+            if ((new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name == "OnCreate")
+            {
+                scores = Scores.GetScoresRankedForDance(id);
+            }         
+            else
+            {
+                scores = Scores.GetScoresRankedForWeek(id);
+            }
+                List<string> couplesAndScores = GetCouplesAndScores(scores, (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name);
+
+                return couplesAndScores;
         }
 
-       public List<string> GetCouplesRankedForDance (int danceId)
-        {
-            List<Score> scores = Scores.GetScoresRankedForDance(danceId);
-            List<string> couplesAndScoresForDance = GetCouplesAndScores(scores);
-
-            return couplesAndScoresForDance;
-        }
-
-        private List<string> GetCouplesAndScores(List<Score> scores)
+        private List<string> GetCouplesAndScores(List<Score> scores, string MethodCalledBy)
         {
             int i = 0;
-            return scores.Select((s) =>
-                    $"{++i:00}" +  ") " +
+
+            /** Checks the first function used to determine whether to format data for Dances or Weeks  */
+            if ((new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name == "GetCouplesRankedForDance")
+            {
+                return scores.Select((s) =>
+                    $"{++i:00}" + ") " +
                     s.Couple.CelebrityFirstName + " " +
                     s.Couple.CelebrityLastName + " & " +
                     s.Couple.ProfessionalFirstName + " " +
-                    s.Couple.ProfessionalLastName + " Score: " +
-                    s.Grade + " Week No: " +
+                    s.Couple.ProfessionalLastName + ", Score: " +
+                    s.Grade + ", Week No: " +
                     s.WeekNumber
                 ).ToList();
+            }
+            else
+            {
+
+                foreach (Score score in scores)
+                {
+                    score.Dance = Dances.GetById(score.DanceID);
+                }
+
+                return scores.Select((s) =>
+                   $"{++i:00}" + ") " +
+                   s.Couple.CelebrityFirstName + " " +
+                   s.Couple.CelebrityLastName + " & " +
+                   s.Couple.ProfessionalFirstName + " " +
+                   s.Couple.ProfessionalLastName + ", Dance: " +
+                   s.Dance.DanceName + ", Score: " +
+                   s.Grade + ", Week No: " +
+                   s.WeekNumber
+               ).ToList();
+            }
         }
 
         public Dance getDanceEnitity(int DanceId)
         {
-            return Dances.GetDancebyId(DanceId);
+            List<Dance> dances = Dances.GetAll();
+
+            Dance dance = new Dance();
+
+            foreach (Dance currentDance in dances)
+            {
+                if (currentDance.DanceID == DanceId)
+                {
+                    dance = currentDance;
+                    break;
+                }
+            }
+            return dance;
         }
+
+
 
         //repositories
         #region Repositries
@@ -78,8 +109,10 @@ namespace StrictlyStatsDataLayer
         private IReposScores _scores;
         private IReposInstructions _instructions;
 
-        public IReposCouples Couples {
-            get {
+        public IReposCouples Couples
+        {
+            get
+            {
                 if (_couples == null)
                 {
                     _couples = new ReposCouples(Connection);
@@ -88,8 +121,10 @@ namespace StrictlyStatsDataLayer
             }
         }
 
-        public IReposDances Dances {
-            get {
+        public IReposDances Dances
+        {
+            get
+            {
                 if (_dances == null)
                 {
                     _dances = new ReposDances(Connection);
@@ -98,8 +133,10 @@ namespace StrictlyStatsDataLayer
             }
         }
 
-        public IReposScores Scores {
-            get {
+        public IReposScores Scores
+        {
+            get
+            {
                 if (_scores == null)
                 {
                     _scores = new ReposScores(Connection);
@@ -108,8 +145,10 @@ namespace StrictlyStatsDataLayer
             }
         }
 
-        public IReposInstructions Instructions {
-            get {
+        public IReposInstructions Instructions
+        {
+            get
+            {
                 if (_instructions == null)
                 {
                     _instructions = new ReposInstructions(Connection);

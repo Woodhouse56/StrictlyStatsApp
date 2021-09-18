@@ -29,8 +29,7 @@ namespace StrictlyStats
         private EditText danceName;
         private EditText description;
         private Spinner degreeOfDifficultySpinner;
-        string dance;
-
+        private string dance;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,7 +38,6 @@ namespace StrictlyStats
 
 
             int danceId = Intent.GetIntExtra("DanceId", -1);
-            danceId -= 1;
             dance = Intent.GetStringExtra("Dance");
 
             submitChangesButton = FindViewById<Button>(Resource.Id.submitChangesButton);
@@ -55,61 +53,24 @@ namespace StrictlyStats
             degreeOfDifficultySpinner.Adapter = adapter;
             degreeOfDifficultySpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
 
-            if (dance != "newDance")
+            if (dance == "newDance")
             {
-
+                danceObject = new Dance { };
+            }
+            else
+            {
                 danceObject = uow.getDanceEnitity(danceId);
 
                 danceName.SetText(danceObject.DanceName, TextView.BufferType.Editable);
                 description.SetText(danceObject.Description, TextView.BufferType.Editable);
+                /** Offsetting due to inherent List entity Offset */
                 danceObject.DegreeOfDifficulty -= 1;
                 degreeOfDifficultySpinner.SetSelection(danceObject.DegreeOfDifficulty);
-            } else
-            {
-                danceObject = new Dance { };
             }
 
             submitChangesButton.Click += SubmitChangesButton_Click; ;
             cancelButton.Click += CancelButton_Click;
             deleteDanceButton.Click += DeleteDanceButton_Click;
-        }
-
-        private void DeleteDanceButton_Click(object sender, EventArgs e)
-        {
-            AlertDialog.Builder alertDiag = new AlertDialog.Builder(this);
-            alertDiag.SetTitle("Confirm deletion");
-            alertDiag.SetMessage("This action is irrevocable");
-            alertDiag.SetPositiveButton("Delete", (senderAlert, args) => {
-                uow.Dances.Delete(danceObject);
-                Toast.MakeText(this, "Deleted", ToastLength.Short).Show();
-                Finish();
-            });
-            alertDiag.SetNegativeButton("Cancel", (senderAlert, args) => {
-                alertDiag.Dispose();
-            });
-            Dialog diag = alertDiag.Create();
-            diag.Show();
-        }
-
-        private void SubmitChangesButton_Click(object sender, EventArgs e)
-        {
-            danceObject.DanceName = danceName.Text;
-            danceObject.Description = description.Text;
-
-            if (dance != "newDance")
-            {
-                uow.Dances.Update(danceObject);
-            }
-            else
-            {
-                uow.Dances.Insert(danceObject);
-            }
-            Finish();
-        }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            Finish();
         }
 
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -118,6 +79,100 @@ namespace StrictlyStats
             long selectedDegreeOfDifficulty = spinner.GetItemIdAtPosition(e.Position);
             danceObject.DegreeOfDifficulty = unchecked((int)selectedDegreeOfDifficulty);
             danceObject.DegreeOfDifficulty += 1;
+        }
+
+
+        private void SubmitChangesButton_Click(object sender, EventArgs e)
+        {
+            SubmitDanceEntity(sender, e);
+        }
+
+        private void DeleteDanceButton_Click(object sender, EventArgs e)
+        {
+            AlertDialogConstructor(sender, e, "Confirm deletion", "This action is irrevocable", "Delete", "Cancel");
+        }
+
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            GoToAdminHomeScreen(sender, e);
+        }
+
+
+        private void SubmitDanceEntity(object sender, EventArgs e)
+        {
+            danceObject.DanceName = danceName.Text;
+            danceObject.Description = description.Text;
+            /** danceObject.DegreeOfDifficulty set in spinner_ItemSelected */
+
+            if (DataVeracityChecker(sender, e))
+            {
+                if (dance == "newDance")
+                {
+                    uow.Dances.Insert(danceObject);
+                    GoToAdminHomeScreen(sender, e);
+                }
+                else
+                {
+                    uow.Dances.Update(danceObject);
+                    GoToAdminHomeScreen(sender, e);
+                }
+            }
+        }
+
+        private Boolean DataVeracityChecker(object sender, EventArgs e)
+        {
+            if (danceName.Text == "")
+            {
+                AlertDialogConstructor(sender, e, "Ensure Name field is complete", "The Name field is not permitted to be left blank.");
+                return false;
+            }
+            else if (danceName.Text.Length > 40 || description.Text.Length > 1000)
+            {
+                AlertDialogConstructor(sender, e, "Too many characters entered", "The Name field character limit is 40, whilst the Description character limit is 1000");
+                return false;
+            }
+            return true;
+        }
+
+        private void AlertDialogConstructor(object sender, EventArgs e, string title, string message, string positiveButton = "Return", string negativeButton = "Quit to Administration Menu")
+        {
+            AlertDialog.Builder alertDiag = new AlertDialog.Builder(this);
+            alertDiag.SetTitle(title);
+            alertDiag.SetMessage(message);
+
+            if (positiveButton == "Return" && negativeButton == "Quit to Administration Menu")
+            {
+                alertDiag.SetPositiveButton(positiveButton, (senderAlert, args) => {
+                alertDiag.Dispose();
+            });
+            alertDiag.SetNegativeButton(negativeButton, (senderAlert, args) => {
+                GoToAdminHomeScreen(sender, e);
+                Finish();
+            });
+            } else if (positiveButton == "Delete")
+            {
+                alertDiag.SetPositiveButton(positiveButton, (senderAlert, args) => {
+                    uow.Dances.Delete(danceObject);
+                    Toast.MakeText(this, "Deleted", ToastLength.Long).Show();
+
+                    GoToAdminHomeScreen(sender, e);
+                    Finish();
+                });
+                alertDiag.SetNegativeButton(negativeButton, (senderAlert, args) => {
+                    alertDiag.Dispose();
+                });
+            }
+            Dialog diag = alertDiag.Create();
+            diag.Show();
+        }
+
+        private void GoToAdminHomeScreen(object sender, EventArgs e)
+        {
+            Intent adminIntent = new Intent(this, typeof(AppAdministrationHomeScreenActivity));
+            adminIntent.PutExtra("ActivityType", (int)ActivityType.AppAdministration);
+            StartActivity(adminIntent);
+            Finish();
         }
 
     }

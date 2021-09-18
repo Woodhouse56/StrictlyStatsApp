@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using SQLite;
+﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
+using System;
 
 namespace StrictlyStatsDataLayer.Models
 {
     [Table("Scores")]
-    public class Score:IComparable<Score>
+    public class Score : IComparable<Score>
     {
         public Score()
         {

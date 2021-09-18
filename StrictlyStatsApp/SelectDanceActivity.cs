@@ -14,17 +14,16 @@ using StrictlyStatsDataLayer.Models;
 
 namespace StrictlyStats
 {
-    [Activity(Label = "Select Week Number")]
+    [Activity(Label = "Select Dance")]
     public class SelectDanceActivity : Activity
     {
         Spinner dancesSpinner;
 
-        string selectedDance;
-        int selectedDanceId;
-        string originPage;
-        IStrictlyStatsUOW uow = Global.UOW;
-        ActivityType activityType;
-        List<Dance> dances;
+        private string selectedDance;
+        private int selectedDanceId;
+        private IStrictlyStatsUOW uow = Global.UOW;
+        private ActivityType activityType;
+        private List<Dance> dances;
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -40,19 +39,18 @@ namespace StrictlyStats
             Button addDanceButton = FindViewById<Button>(Resource.Id.addDanceButton);
             Button modifySelectedDanceButton = FindViewById<Button>(Resource.Id.modifySelectedDanceButton);
 
-
             activityType = (ActivityType)Intent.GetIntExtra("ActivityType", -1);
 
-            originPage = originPage = originPage = Intent.GetStringExtra("OriginPage");
+            /** Checks which elements of the UI to display depending on whether this page was requested by the Admin Page, or a Ranking/Other page */
+            if (activityType == ActivityType.AppAdministration)
+            {
+                okButton.Visibility = ViewStates.Gone;
 
-            if (originPage == "MainActivity")
+            }
+            else
             {
                 addDanceButton.Visibility = ViewStates.Gone;
                 modifySelectedDanceButton.Visibility = ViewStates.Gone;
-            }
-            else if (originPage == "AppAdministrationHomeScreenActivity")
-            {
-                okButton.Visibility = ViewStates.Gone;
             }
 
             //Create array of strings containing dance names
@@ -70,48 +68,19 @@ namespace StrictlyStats
 
         private void AddDanceButton_Click(object sender, EventArgs e)
         {
-            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(modifyDancesActivity));
-            rankCouplesByDanceActivityIntent.PutExtra("Dance", "newDance");
-            StartActivity(rankCouplesByDanceActivityIntent);
-            Finish();
+            selectedDance = "newDance";
+            modifyDancesActivity(sender, e);
         }
 
         private void ModifySelectedDanceButton_Click(object sender, EventArgs e)
         {
-            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(modifyDancesActivity));
-            rankCouplesByDanceActivityIntent.PutExtra("Dance", selectedDance);
-            rankCouplesByDanceActivityIntent.PutExtra("DanceId", selectedDanceId);
-            StartActivity(rankCouplesByDanceActivityIntent);
-            Finish();
+            modifyDancesActivity(sender, e);
         }
 
         private void OkButton_Click(object sender, EventArgs e)
-        { 
-            if (originPage == "MainActivity")
-            {
-                RankCouplesByDanceActivity(sender, e);
-            } else if (originPage == "AppAdministrationHomeScreenActivity")
-            {
-                modifyDancesActivity(sender, e);
-            }
-        }
-
-        private void RankCouplesByDanceActivity(object sender, EventArgs e)
         {
-            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(RankCouplesByDanceActivity));
-            rankCouplesByDanceActivityIntent.PutExtra("Dance", selectedDance);
-            rankCouplesByDanceActivityIntent.PutExtra("DanceId", selectedDanceId);
-            StartActivity(rankCouplesByDanceActivityIntent);
-            Finish();
-        }
-
-        private void modifyDancesActivity(object sender, EventArgs e)
-        {
-            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(modifyDancesActivity));
-            rankCouplesByDanceActivityIntent.PutExtra("Dance", selectedDance);
-            rankCouplesByDanceActivityIntent.PutExtra("DanceId", selectedDanceId);
-            StartActivity(rankCouplesByDanceActivityIntent);
-            Finish();
+            /** Call sub-method allowing for easier future development */
+            RankCouplesByDanceActivity(sender, e);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -124,9 +93,37 @@ namespace StrictlyStats
             Spinner spinner = (Spinner)sender;
             selectedDance = string.Format("{0}", spinner.GetItemIdAtPosition(e.Position));
             selectedDanceId = int.Parse(selectedDance);
-            selectedDanceId += 1;
+
+            /** 
+             Looks into original 'dances' list and grabs DanceID 
+             using key aquired from spinner.
+             */
+            selectedDanceId = dances[selectedDanceId].DanceID;
         }
 
+        private void RankCouplesByDanceActivity(object sender, EventArgs e)
+        {
+            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(RankCouplesActivity));
+
+            rankCouplesByDanceActivityIntent.PutExtra("Dance", selectedDance);
+            rankCouplesByDanceActivityIntent.PutExtra("DanceId", selectedDanceId);
+            rankCouplesByDanceActivityIntent.PutExtra("ActivityType", (int)ActivityType.RankingsByDance);
+
+            StartActivity(rankCouplesByDanceActivityIntent);
+            Finish();
+        }
+
+        private void modifyDancesActivity(object sender, EventArgs e)
+        {
+            Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(modifyDancesActivity));
+
+            rankCouplesByDanceActivityIntent.PutExtra("Dance", selectedDance);
+            rankCouplesByDanceActivityIntent.PutExtra("DanceId", selectedDanceId);
+            rankCouplesByDanceActivityIntent.PutExtra("ActivityType", (int)ActivityType.RankingsByDance);
+
+            StartActivity(rankCouplesByDanceActivityIntent);
+            Finish();
+        }
     }
 
 }

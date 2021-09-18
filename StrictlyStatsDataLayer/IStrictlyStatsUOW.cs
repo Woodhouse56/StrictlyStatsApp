@@ -1,15 +1,5 @@
-﻿using System;
+﻿using StrictlyStatsDataLayer.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using StrictlyStatsDataLayer.Models;
 
 namespace StrictlyStatsDataLayer
 {
@@ -25,8 +15,7 @@ namespace StrictlyStatsDataLayer
         IReposScores Scores { get; }
         IReposInstructions Instructions { get; }
 
-        List<string> GetCouplesRankedForWeekNumber(int weekNumber);
-        List<string> GetCouplesRankedForDance(int danceId);
+        List<string> GetCouplesRanked(int weekNumber);
         public Dance getDanceEnitity(int DanceId);
 
     }
