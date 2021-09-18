@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/enterScoresButton" />
     <Button
-        android:text="Rankings"
+        android:text="Rankings By Week"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rankingsButton" />
