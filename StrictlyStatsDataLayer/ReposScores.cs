@@ -1,16 +1,7 @@
-﻿using System;
+﻿using SQLite;
+using StrictlyStatsDataLayer.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using SQLite;
-using StrictlyStatsDataLayer.Models;
 
 namespace StrictlyStatsDataLayer
 {
@@ -24,24 +15,24 @@ namespace StrictlyStatsDataLayer
         public List<Score> GetScoresRankedForWeek(int weekNumber)
         {
             List<Score> scores = Get(s => s.WeekNumber == weekNumber, s => s.Grade).ToList();
-            scores.Reverse();
-            foreach (Score score in scores)
-            {
-                score.Couple = con.Table<Couple>().Single(c => c.CoupleID == score.CoupleID);
-            }
-
+            GetCouples(scores);
             return scores;
         }
 
         public List<Score> GetScoresRankedForDance(int danceId)
         {
             List<Score> scores = Get(s => s.DanceID == danceId, s => s.Grade).ToList();
+            GetCouples(scores);
+            return scores;
+        }
+
+        private List<Score> GetCouples(List<Score> scores)
+        {
             scores.Reverse();
             foreach (Score score in scores)
             {
                 score.Couple = con.Table<Couple>().Single(c => c.CoupleID == score.CoupleID);
             }
-
             return scores;
         }
 

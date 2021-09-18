@@ -1,22 +1,14 @@
-﻿using System;
+﻿using SQLite;
+using StrictlyStatsDataLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using SQLite;
-using StrictlyStatsDataLayer.Models;
 
 namespace StrictlyStatsDataLayer
 {
     public class ReposCouples : Repository<Couple>, IReposCouples
     {
-        public ReposCouples(SQLiteConnection con):base(con)
+        public ReposCouples(SQLiteConnection con) : base(con)
         {
 
         }
@@ -50,7 +42,8 @@ namespace StrictlyStatsDataLayer
                 throw new Exception("A couple has already been voted off for the specified week");
         }
 
-        public Couple GetWinner(){
+        public Couple GetWinner()
+        {
             List<Couple> couples = Get(c => c.VotedOffWeekNumber == null, c => c.CoupleID);
             if (couples.Count == 1)
                 return couples[0];

@@ -16,14 +16,24 @@ namespace StrictlyStats
     [Activity(Label = "Select Week Number")]
     public class SelectWeekNumberActivity : Activity
     {
-        Spinner weekNumberSpinner;
-        int selectedWeekNumber;
-        IStrictlyStatsUOW uow = Global.UOW;
-        ActivityType activityType;
+        private Spinner weekNumberSpinner;
+        private int selectedWeekNumber;
+        private IStrictlyStatsUOW uow = Global.UOW;
+        private ActivityType activityType;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            int uiOptions = (int)Window.DecorView.SystemUiVisibility;
+
+            uiOptions |= (int)SystemUiFlags.LowProfile;
+            uiOptions |= (int)SystemUiFlags.Fullscreen;
+            uiOptions |= (int)SystemUiFlags.HideNavigation;
+            uiOptions |= (int)SystemUiFlags.ImmersiveSticky;
+
+            Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
+
             SetContentView(Resource.Layout.SelectWeekNumber);
 
             weekNumberSpinner = FindViewById<Spinner>(Resource.Id.weekNumberSpinner);
@@ -48,6 +58,11 @@ namespace StrictlyStats
                 currentWeekNumber = numberOfWeeksCompetitionWillRunFor - 1;
             weekNumberSpinner.SetSelection(currentWeekNumber);
 
+            if(activityType == ActivityType.EnterScores)
+            {
+               
+            }
+
             okButton.Click += OkButton_Click;
             cancelButton.Click += CancelButton_Click;
         }
@@ -68,15 +83,34 @@ namespace StrictlyStats
             }
             else if (activityType == ActivityType.Rankings)
             {
-                Intent rankCouplesIntent = new Intent(this, typeof(RankCouplesActivity));
-                rankCouplesIntent.PutExtra("WeekNumber", selectedWeekNumber);
-                rankCouplesIntent.PutExtra("ActivityType", (int)activityType);
-                StartActivity(rankCouplesIntent);
-                if (uow.Couples.GetCurrentWeekNumber() >= selectedWeekNumber)
-                    Finish();
+                List<string> rankedCouples;
+                rankedCouples = uow.GetCouplesRanked(selectedWeekNumber);
+
+                if (rankedCouples.Count == 0)
+                {
+                    string message;
+                    if (activityType == ActivityType.Rankings)
+                        message = "There are no scores for week " + selectedWeekNumber;
+                    else
+                        message = "No scores have been added to the database";
+
+                    var dlgAlert = (new AlertDialog.Builder(this)).Create();
+                    dlgAlert.SetMessage(message);
+                    dlgAlert.SetTitle("No Scores");
+                    dlgAlert.SetButton("OK", (s, e) => { Finish(); });
+                    dlgAlert.Show();
+                    return;
+                }
+
+                ListView rankedCouplesListView = FindViewById<ListView>(Resource.Id.rankedCouplesListView);
+                Button okButton = FindViewById<Button>(Resource.Id.okButton);
+                TextView headingTextView = FindViewById<TextView>(Resource.Id.headingTextView);
+
+                headingTextView.Text = $"Rankings for week number: {selectedWeekNumber}";
+
+                rankedCouplesListView.Adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, rankedCouples);
                 return;
             }
-            ContinueButton_Click(sender, e);
 
         }
 

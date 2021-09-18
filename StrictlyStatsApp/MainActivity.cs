@@ -1,11 +1,11 @@
 ﻿using Android.App;
-using Android.OS;
-using Android.Support.V7.App;
-using Android.Runtime;
-using Android.Widget;
-using System.IO;
 using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Support.V7.App;
+using Android.Widget;
 using StrictlyStatsDataLayer;
+using System.IO;
 
 namespace StrictlyStats
 {
@@ -14,8 +14,6 @@ namespace StrictlyStats
     {
         Button enterScoresButton;
         Button voteOffButton;
-        const string originPage = "MainActivity";
-
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -87,17 +85,16 @@ namespace StrictlyStats
 
         private void RankingsButton_Click(object sender, System.EventArgs e)
         {
-                Intent rankingsIntent = new Intent(this, typeof(SelectWeekNumberActivity));
-                rankingsIntent.PutExtra("ActivityType", (int)ActivityType.Rankings);
-                StartActivity(rankingsIntent);
-                return;
+            Intent rankingsIntent = new Intent(this, typeof(SelectWeekNumberActivity));
+            rankingsIntent.PutExtra("ActivityType", (int)ActivityType.Rankings);
+            StartActivity(rankingsIntent);
+            return;
         }
 
         private void RankingsByDanceButton_Click(object sender, System.EventArgs e)
         {
             Intent rankingsIntent = new Intent(this, typeof(SelectDanceActivity));
-            rankingsIntent.PutExtra("ActivityType", (int)ActivityType.Rankings);
-            rankingsIntent.PutExtra("OriginPage", originPage);
+            rankingsIntent.PutExtra("ActivityType", (int)ActivityType.RankingsByDance);
             StartActivity(rankingsIntent);
             return;
         }

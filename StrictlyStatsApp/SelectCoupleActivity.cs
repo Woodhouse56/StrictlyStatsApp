@@ -17,10 +17,10 @@ namespace StrictlyStats
     [Activity(Label = "Select Couple")]
     public class SelectCoupleActivity : ListActivity
     {
-        IStrictlyStatsUOW uow = Global.UOW;
-        List<Couple> couples;
-        ActivityType activityType;
-        int position = -1;
+        private IStrictlyStatsUOW uow = Global.UOW;
+        private List<Couple> couples;
+        private ActivityType activityType;
+        private int position = -1;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

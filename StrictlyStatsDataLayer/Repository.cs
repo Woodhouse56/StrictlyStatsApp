@@ -1,17 +1,7 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using SQLite;
 
 namespace StrictlyStatsDataLayer
 {
@@ -51,7 +41,8 @@ namespace StrictlyStatsDataLayer
         public TableQuery<T> AsQueryable() =>
             con.Table<T>();
 
-        public int Insert(T entity) {
+        public int Insert(T entity)
+        {
             int i = con.Insert(entity);
             return i;
         }
