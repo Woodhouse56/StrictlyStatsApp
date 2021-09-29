@@ -12,6 +12,15 @@ using Android.Widget;
 using StrictlyStatsDataLayer;
 using StrictlyStatsDataLayer.Models;
 
+/*
+References:
+Code elaborates upon foundations within the original source code provided by Behague, Peter.
+Behague, P. (2021) [online] StrictlyStatsStarter.zip, Available from:
+https://canvas.qa.com/courses/1741/files/948721 [Accessed 02/09/21] [1]
+Ochieng, C. (2020) [online] Xamarin Android – ListView – Images,Text and ItemClick, Available from:
+https://camposha.info/xamarin-android-listview-imagestext-and-itemclick/ [Accessed 16/09/21] [3]
+*/
+
 namespace StrictlyStats
 {
     [Activity(Label = "Select Couple")]
@@ -22,6 +31,7 @@ namespace StrictlyStats
         private ActivityType activityType;
         private int position = -1;
 
+        //<-*****Behague, P (2021) [1]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -34,6 +44,7 @@ namespace StrictlyStats
             this.ListView.ItemClick += ListView_ItemClick;
         }
 
+        //<-*****Ochieng, C (2020) [3]
         private void ListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
 
@@ -48,12 +59,13 @@ namespace StrictlyStats
             return;
         }
 
-
+        //<-*****Behague, P (2021) [1]
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Finish();
         }
 
+        //<-*****Behague, P (2021) [1]
         private void ContinueButton_Click(object sender, EventArgs e)
         {
             int weekNumber = uow.Couples.GetCurrentWeekNumber();

@@ -11,6 +11,16 @@ using Android.Views;
 using Android.Widget;
 using StrictlyStatsDataLayer;
 
+/*
+References:
+Code elaborates upon foundations within the original source code provided by Behague, Peter.
+Behague, P. (2021) [online] StrictlyStatsStarter.zip, Available from:
+https://canvas.qa.com/courses/1741/files/948721 [Accessed 02/09/21] [1]
+Sunday, B, F. (2019) [online] Hiding the navigation soft keys Android Xamarin Forms, Available from:
+https://viblo.asia/p/hiding-the-navigation-soft-keys-android-xamarin-forms-ByEZkO0YZQ0 [Accessed 11/09/21] [4]
+
+*/
+
 namespace StrictlyStats
 {
     [Activity(Label = "Select Week Number")]
@@ -21,10 +31,12 @@ namespace StrictlyStats
         private IStrictlyStatsUOW uow = Global.UOW;
         private ActivityType activityType;
 
+        //<-*****Behague, P (2021) [1]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
+            //<-*****Sunday, B, F. (2019) [4] - START
             int uiOptions = (int)Window.DecorView.SystemUiVisibility;
 
             uiOptions |= (int)SystemUiFlags.LowProfile;
@@ -33,6 +45,7 @@ namespace StrictlyStats
             uiOptions |= (int)SystemUiFlags.ImmersiveSticky;
 
             Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
+            //<-*****Sunday, B, F. (2019) [4] - END
 
             SetContentView(Resource.Layout.SelectWeekNumber);
 
@@ -67,6 +80,7 @@ namespace StrictlyStats
             cancelButton.Click += CancelButton_Click;
         }
 
+        //<-*****Behague, P (2021) [1]
         private void OkButton_Click(object sender, EventArgs e)
         {
             int position = weekNumberSpinner.SelectedItemPosition;
@@ -114,11 +128,13 @@ namespace StrictlyStats
 
         }
 
+        //<-*****Behague, P (2021) [1]
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Finish();
         }
 
+        //<-*****Behague, P (2021) [1]
         private void ContinueButton_Click(object sender, EventArgs e)
         {
             Intent enterScoreIntent = new Intent(this, typeof(EnterScoresActivity));

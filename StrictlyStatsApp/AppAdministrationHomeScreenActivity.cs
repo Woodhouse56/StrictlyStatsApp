@@ -12,6 +12,12 @@ using Android.Widget;
 using StrictlyStatsDataLayer;
 using StrictlyStatsDataLayer.Models;
 
+/*
+References:
+Code elaborates upon foundations within the original source code provided by Behague, Peter.
+Behague, P. (2021) [online] StrictlyStatsStarter.zip, Available from:
+https://canvas.qa.com/courses/1741/files/948721 [Accessed 02/09/21] [1]
+*/
 
 namespace StrictlyStats
 {
@@ -21,6 +27,8 @@ namespace StrictlyStats
     {
         IStrictlyStatsUOW uow = Global.UOW;
         ActivityType activityType;
+
+        //<-*****Behague, P (2021) [1]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -42,6 +50,7 @@ namespace StrictlyStats
             /** Ready for Further Development */
         }
 
+        //<-*****Behague, P (2021) [1]
         private void modifyDancesButton_Click(object sender, EventArgs e)
         {
             Intent modifyDancesIntent = new Intent(this, typeof(SelectDanceActivity));
@@ -55,6 +64,7 @@ namespace StrictlyStats
             /** Ready for Further Development */
         }
 
+        //<-*****Behague, P (2021) [1]
         private void returnToMainMenuButton_Click(object sender, EventArgs e)
         {
             Finish();

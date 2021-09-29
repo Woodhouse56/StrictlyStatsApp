@@ -7,6 +7,14 @@ using Android.Widget;
 using StrictlyStatsDataLayer;
 using System.IO;
 
+
+/*
+References:
+Code elaborates upon foundations within the original source code provided by Behague, Peter.
+Behague, P. (2021) [online] StrictlyStatsStarter.zip, Available from:
+https://canvas.qa.com/courses/1741/files/948721 [Accessed 02/09/21] [1]
+*/
+
 namespace StrictlyStats
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
@@ -44,11 +52,13 @@ namespace StrictlyStats
             Button rankingsButton = FindViewById<Button>(Resource.Id.rankingsButton);
             rankingsButton.Click += RankingsButton_Click;
 
+            //<-*****Behague, P (2021) [1] - START
             Button rankingsByDanceButton = FindViewById<Button>(Resource.Id.rankingsByDanceButton);
             rankingsByDanceButton.Click += RankingsByDanceButton_Click;
 
             Button appAdministrationButton = FindViewById<Button>(Resource.Id.appAdministrationButton);
             appAdministrationButton.Click += AppAdministrationButton_Click;
+            //<-*****Behague, P (2021) [1] - END
 
             voteOffButton = FindViewById<Button>(Resource.Id.voteOffButton);
             voteOffButton.Click += VoteOffButton_Click;
@@ -91,6 +101,7 @@ namespace StrictlyStats
             return;
         }
 
+        //<-*****Behague, P (2021) [1]
         private void RankingsByDanceButton_Click(object sender, System.EventArgs e)
         {
             Intent rankingsIntent = new Intent(this, typeof(SelectDanceActivity));
@@ -99,6 +110,7 @@ namespace StrictlyStats
             return;
         }
 
+        //<-*****Behague, P (2021) [1]
         private void AppAdministrationButton_Click(object sender, System.EventArgs e)
         {
             Intent adminIntent = new Intent(this, typeof(AppAdministrationHomeScreenActivity));

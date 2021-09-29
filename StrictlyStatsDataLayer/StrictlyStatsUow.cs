@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+/*
+References:
+Code elaborates upon foundations within the original source code provided by Behague, Peter.
+Behague, P. (2021) [online] StrictlyStatsStarter.zip, Available from:
+https://canvas.qa.com/courses/1741/files/948721 [Accessed 02/09/21] [1]
+*/
+
 namespace StrictlyStatsDataLayer
 {
     public class StrictlyStatsUow : IStrictlyStatsUOW
@@ -27,6 +34,7 @@ namespace StrictlyStatsDataLayer
             Connection = new SQLiteConnection(dbPath);
         }
 
+        //<-*****Behague, P (2021) [1]
         public List<string> GetCouplesRanked(int id)
         {
             List<Score> scores;
@@ -45,6 +53,7 @@ namespace StrictlyStatsDataLayer
                 return couplesAndScores;
         }
 
+        //<-*****Behague, P (2021) [1]
         private List<string> GetCouplesAndScores(List<Score> scores, string MethodCalledBy)
         {
             int i = 0;

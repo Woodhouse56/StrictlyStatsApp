@@ -9,9 +9,17 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using StrictlyStatsDataLayer;
+using StrictlyStatsDataLayer;        
 using StrictlyStatsDataLayer.Models;
 
+/*
+References:
+Code elaborates upon foundations within the original source code provided by Behague, Peter.
+Behague, P. (2021) [online] StrictlyStatsStarter.zip, Available from:
+https://canvas.qa.com/courses/1741/files/948721 [Accessed 02/09/21] [1]
+Microsoft (no date) [online] EditText Class, Available from:
+https://docs.microsoft.com/en-us/dotnet/api/android.widget.edittext?view=xamarin-android-sdk-9 [Accessed 14/09/21] [2]
+*/
 
 namespace StrictlyStats
 {
@@ -61,8 +69,11 @@ namespace StrictlyStats
             {
                 danceObject = uow.getDanceEnitity(danceId);
 
+                //<-*****Microsoft (no date) [2] - START
                 danceName.SetText(danceObject.DanceName, TextView.BufferType.Editable);
                 description.SetText(danceObject.Description, TextView.BufferType.Editable);
+                //<-*****Microsoft (no date) [2] - START
+
                 /** Offsetting due to inherent List entity Offset */
                 danceObject.DegreeOfDifficulty -= 1;
                 degreeOfDifficultySpinner.SetSelection(danceObject.DegreeOfDifficulty);
@@ -135,6 +146,7 @@ namespace StrictlyStats
             return true;
         }
 
+        //<-*****Behague, P (2021) [1]
         private void AlertDialogConstructor(object sender, EventArgs e, string title, string message, string positiveButton = "Return", string negativeButton = "Quit to Administration Menu")
         {
             AlertDialog.Builder alertDiag = new AlertDialog.Builder(this);
@@ -167,6 +179,7 @@ namespace StrictlyStats
             diag.Show();
         }
 
+        //<-*****Behague, P (2021) [1]
         private void GoToAdminHomeScreen(object sender, EventArgs e)
         {
             Intent adminIntent = new Intent(this, typeof(AppAdministrationHomeScreenActivity));

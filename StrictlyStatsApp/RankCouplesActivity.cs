@@ -12,6 +12,13 @@ using Android.Widget;
 using StrictlyStatsDataLayer;
 using StrictlyStatsDataLayer.Models;
 
+/*
+References:
+Code elaborates upon foundations within the original source code provided by Behague, Peter.
+Behague, P. (2021) [online] StrictlyStatsStarter.zip, Available from:
+https://canvas.qa.com/courses/1741/files/948721 [Accessed 02/09/21] [1]
+*/
+
 namespace StrictlyStats
 {
     [Activity(Label = "Home")]
@@ -19,11 +26,11 @@ namespace StrictlyStats
     {
         private IStrictlyStatsUOW uow = Global.UOW;
 
+        //<-*****Behague, P (2021) [1]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.RankedCouples);
-
 
             ListView rankedCouplesListView = FindViewById<ListView>(Resource.Id.rankedCouplesListView);
             Button okButton = FindViewById<Button>(Resource.Id.okButton);
@@ -79,6 +86,7 @@ namespace StrictlyStats
             okButton.Click += OkButton_Click;
         }
 
+        //<-*****Behague, P (2021) [1]
         private void NoScoresAlertDialogueConstructor(string message)
         {
             var dlgAlert = (new AlertDialog.Builder(this)).Create();
@@ -88,6 +96,7 @@ namespace StrictlyStats
             dlgAlert.Show();
         }
 
+        //<-*****Behague, P (2021) [1]
         private void OkButton_Click(object sender, EventArgs e)
         {
             Finish();

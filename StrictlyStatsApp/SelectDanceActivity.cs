@@ -12,6 +12,13 @@ using Android.Widget;
 using StrictlyStatsDataLayer;
 using StrictlyStatsDataLayer.Models;
 
+/*
+References:
+Code elaborates upon foundations within the original source code provided by Behague, Peter.
+Behague, P. (2021) [online] StrictlyStatsStarter.zip, Available from:
+https://canvas.qa.com/courses/1741/files/948721 [Accessed 02/09/21] [1]
+*/
+
 namespace StrictlyStats
 {
     [Activity(Label = "Select Dance")]
@@ -25,7 +32,7 @@ namespace StrictlyStats
         private ActivityType activityType;
         private List<Dance> dances;
 
-
+        //<-*****Behague, P (2021) [1]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -66,28 +73,33 @@ namespace StrictlyStats
             addDanceButton.Click += AddDanceButton_Click;
         }
 
+        //<-*****Behague, P (2021) [1]
         private void AddDanceButton_Click(object sender, EventArgs e)
         {
             selectedDance = "newDance";
             modifyDancesActivity(sender, e);
         }
 
+        //<-*****Behague, P (2021) [1]
         private void ModifySelectedDanceButton_Click(object sender, EventArgs e)
         {
             modifyDancesActivity(sender, e);
         }
 
+        //<-*****Behague, P (2021) [1]
         private void OkButton_Click(object sender, EventArgs e)
         {
             /** Call sub-method allowing for easier future development */
             RankCouplesByDanceActivity(sender, e);
         }
 
+        //<-*****Behague, P (2021) [1]
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Finish();
         }
 
+        //<-*****Behague, P (2021) [1]
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;
@@ -101,6 +113,7 @@ namespace StrictlyStats
             selectedDanceId = dances[selectedDanceId].DanceID;
         }
 
+        //<-*****Behague, P (2021) [1]
         private void RankCouplesByDanceActivity(object sender, EventArgs e)
         {
             Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(RankCouplesActivity));
@@ -113,6 +126,7 @@ namespace StrictlyStats
             Finish();
         }
 
+        //<-*****Behague, P (2021) [1]
         private void modifyDancesActivity(object sender, EventArgs e)
         {
             Intent rankCouplesByDanceActivityIntent = new Intent(this, typeof(modifyDancesActivity));
